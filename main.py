@@ -23,7 +23,6 @@ def select_folder():
     path = askdirectory(title='Select your folder')
 
     assert os.path.isdir(path), "Invalid path"
-    os.chdir(path)
 
     # construct path object
     d = pathlib.Path(path)
@@ -36,7 +35,7 @@ def select_folder():
             ext_list.append(ext)
             print(ext)
             # create new folder for each file type
-            new_folder = d / (pre_text + " " + ext[1:].upper() + " " + post_text)
+            new_folder = d / (pre_text + " ." + ext[1:] + " " + post_text)
             if not new_folder.is_dir():
                 new_folder.mkdir()
             # move files to new folder
