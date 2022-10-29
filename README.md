@@ -21,7 +21,7 @@ You will need to have python installed on your machine.
 Clone the repository
 
 ```bash
-git clone reponame
+git clone https://github.com/faiqali1/File-Organiser
 ```
 
 ## Usage <a name = "usage"></a>
