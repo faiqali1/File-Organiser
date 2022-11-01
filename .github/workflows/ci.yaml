@@ -1,0 +1,36 @@
+name: 'Continuous Integration'
+
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - main
+      - dev
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [ubuntu-20.04]
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - run: python -m pip install -e .
+
+  unit_tests:
+    needs: build
+    strategy:
+      matrix:
+        platform: [ubuntu-20.04]
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - run: python -m pip install -e .
+      - run: pytest

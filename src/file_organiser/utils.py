@@ -1,25 +1,13 @@
 import pathlib
-from tkinter import Tk
 from tkinter import ttk
-from tkinter import messagebox
 from tkinter.filedialog import askdirectory
 import os
 
-label = ""
-
-ext_list = []
-
-# Tasks:
-# search through folder to find files
-# identify file types
-# create new folder for each file type
-# move files to new folder
-
-pre_text: str = ""
-post_text: str = "Files"
-
+PREFIX_TEXT: str = ""
+SUFFIX_TEXT: str = "Files"
 
 def select_folder():
+    ext_list = []
     path = askdirectory(title='Select your folder')
 
     assert os.path.isdir(path), "Invalid path"
@@ -35,7 +23,7 @@ def select_folder():
             ext_list.append(ext)
             print(ext)
             # create new folder for each file type
-            new_folder = d / (pre_text + " ." + ext[1:] + " " + post_text)
+            new_folder = d / (PREFIX_TEXT + " ." + ext[1:] + " " + SUFFIX_TEXT)
             if not new_folder.is_dir():
                 new_folder.mkdir()
             # move files to new folder
@@ -45,12 +33,9 @@ def select_folder():
     status = ttk.Label(text=f"Transfer Complete with {len(ext_list)} Files Transferred created")
     status.pack()
 
+def hello_world() -> str:
+    return "Hello world"
 
-root = Tk()
-root.title('select your folder')
-root.resizable(True, True)
-root.geometry('400x200')
-open_button = ttk.Button(root, text='Select Folder', command=select_folder)
-open_button.pack(expand=True)
-multiple_label = ttk.Label(root, text=label)
-root.mainloop()
+def return_10() -> int:
+    return 10
+
